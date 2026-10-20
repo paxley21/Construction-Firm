@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diaz Construction Co. | Building Tomorrow's Foundation</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts for custom typography fallbacks -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Great+Vibes&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Custom Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            deep: '#4B3F6E',     /* Deep Slate / Purple */
+                            teal: '#6CBFAD',     /* Mint Teal */
+                            violet: '#9C8CB9',   /* Soft Violet */
+                            lavender: '#BA98C1', /* Lavender Accent */
+                            warm: '#DCD7D5',     /* Warm Light Grey */
+                            dark: '#231E33',     /* Dark Text/Surface */
+                            card: '#FAF9F8'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', 'Cinzel', 'serif'],  /* Revista Black style heavy serif display */
+                        subheading: ['"Great Vibes"', '"Alex Brush"', 'cursive'], /* Adorn Coronette style script */
+                        body: ['Poppins', 'sans-serif']                      /* Poppy modern clean sans-serif */
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Animation Tweaks */
+        body {
+            background-color: #DCD7D5;
+            color: #231E33;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Header */
+        .glass-nav {
+            background: rgba(75, 63, 110, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* Heading typography override for Revista Black vibe */
+        .font-revista {
+            font-family: 'Playfair Display', 'Cinzel', serif;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+        }
+
+        .font-coronette {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        /* Custom Cursor Follower */
+        #cursor-dot, #cursor-ring {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            transition: opacity 0.3s ease;
+        }
+        #cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #6CBFAD;
+        }
+        #cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 2px solid rgba(186, 152, 193, 0.6);
+            transition: transform 0.15s ease-out, width 0.2s ease, height 0.2s ease;
+        }
+
+        /* Floating Click Particle Effect */
+        .click-particle {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            animation: particle-fade 0.6s ease-out forwards;
+            z-index: 9998;
+        }
+
+        @keyframes particle-fade {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.9; }
+            100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0); opacity: 0; }
+        }
+
+        /* Scroll Reveal Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #DCD7D5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #9C8CB9;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4B3F6E;
+        }
+    </style>
+</head>
+<body class="text-brand-dark relative selection:bg-brand-teal selection:text-brand-dark">
+
+    <!-- Light Custom Glowing Cursor Trail -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- Navigation Bar -->
+    <header id="main-header" class="fixed top-0 left-0 right-0 z-50 glass-nav text-white transition-all duration-300 py-4 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-brand-teal to-brand-lavender flex items-center justify-center text-brand-deep font-bold text-xl shadow-md group-hover:scale-105 transition-transform">
+                    D
+                </div>
+                <div>
+                    <span class="font-revista text-xl tracking-wider block font-bold leading-none text-white">DIAZ</span>
+                    <span class="text-[10px] tracking-widest text-brand-teal font-semibold uppercase block">Construction Co.</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-7 font-medium text-sm">
+                <a href="#home" class="nav-link hover:text-brand-teal transition-colors py-1">Home</a>
+                <a href="#about" class="nav-link hover:text-brand-teal transition-colors py-1">About Us</a>
+                <a href="#hiring" class="nav-link hover:text-brand-teal transition-colors py-1 flex items-center gap-1.5">
+                    Live Hiring
+                    <span id="nav-live-badge" class="flex h-2 w-2 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-teal opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-teal"></span>
+                    </span>
+                </a>
+                <a href="#apply" class="nav-link hover:text-brand-teal transition-colors py-1">Careers & Apply</a>
+                <a href="#tracker" class="nav-link hover:text-brand-teal transition-colors py-1">Status Tracker</a>
+                <a href="#projects" class="nav-link hover:text-brand-teal transition-colors py-1">Projects</a>
+            </nav>
+
+            <!-- Public Hotline / Quick Contact -->
+            <div class="hidden md:flex items-center gap-3">
+                <a href="#apply" class="bg-brand-teal/20 hover:bg-brand-teal text-brand-teal hover:text-brand-dark border border-brand-teal/50 font-semibold px-4 py-2 rounded-xl text-xs transition-all flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-hard-hat"></i>
+                    <span>Apply Now</span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-2xl text-white focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden glass-nav border-t border-brand-violet/30 px-6 py-4 space-y-3">
+            <a href="#home" class="block hover:text-brand-teal transition-colors py-2">Home</a>
+            <a href="#about" class="block hover:text-brand-teal transition-colors py-2">About Us</a>
+            <a href="#hiring" class="block hover:text-brand-teal transition-colors py-2">Live Hiring Board</a>
+            <a href="#apply" class="block hover:text-brand-teal transition-colors py-2">Submit Application</a>
+            <a href="#tracker" class="block hover:text-brand-teal transition-colors py-2">Check Application Status</a>
+            <a href="#projects" class="block hover:text-brand-teal transition-colors py-2">Projects</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden bg-gradient-to-b from-brand-deep via-brand-deep to-[#362C52] text-white">
+        <!-- Background Grid Graphic -->
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#6CBFAD_1px,transparent_1px)] [background-size:24px_24px]"></div>
+        
+        <!-- Glowing Orbs -->
+        <div class="absolute top-1/4 -left-20 w-80 h-80 bg-brand-violet/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 right-0 w-96 h-96 bg-brand-teal/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7 space-y-6 text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-medium text-brand-teal">
+                        <span class="w-2 h-2 rounded-full bg-brand-teal animate-pulse"></span>
+                        ISO 9001:2015 Certified Construction Firm
+                    </div>
+
+                    <h1 class="font-revista text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight">
+                        Crafting <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal via-brand-lavender to-white">Legacies</span> In Every Structure.
+                    </h1>
+
+                    <p class="font-coronette text-3xl sm:text-4xl text-brand-lavender">
+                        Excellence built with integrity and master engineering
+                    </p>
+
+                    <p class="text-gray-300 text-base sm:text-lg max-w-2xl leading-relaxed font-light">
+                        Diaz Construction Company is a premier contractor specializing in commercial, civil infrastructure, and heavy industrial engineering across the nation.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="#hiring" class="bg-gradient-to-r from-brand-teal to-teal-400 text-brand-dark hover:shadow-lg hover:shadow-brand-teal/30 font-bold px-7 py-3.5 rounded-xl transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                            <span>Explore Openings</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="#apply" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 font-semibold px-7 py-3.5 rounded-xl transition-all backdrop-blur-sm flex items-center gap-2">
+                            <i class="fa-solid fa-file-signature text-brand-teal"></i>
+                            <span>Submit Application</span>
+                        </a>
+                    </div>
+
+                    <!-- Live Metrics Counter -->
+                    <div class="grid grid-cols-3 gap-4 pt-10 border-t border-white/10 mt-8">
+                        <div>
+                            <span class="block text-2xl sm:text-4xl font-revista font-bold text-brand-teal">140+</span>
+                            <span class="text-xs text-gray-300 font-medium">Projects Done</span>
+                        </div>
+                        <div>
+                            <span class="block text-2xl sm:text-4xl font-revista font-bold text-brand-lavender">28</span>
+                            <span class="text-xs text-gray-300 font-medium">Active Sites</span>
+                        </div>
+                        <div>
+                            <span id="hero-hired-count" class="block text-2xl sm:text-4xl font-revista font-bold text-white">450+</span>
+                            <span class="text-xs text-gray-300 font-medium">Skilled Workforce</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Interactive Visual Card -->
+                <div class="lg:col-span-5">
+                    <div class="glass-card bg-brand-dark/40 border border-white/15 p-6 sm:p-8 rounded-3xl shadow-2xl relative overflow-hidden backdrop-blur-xl">
+                        <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-brand-teal/20 rounded-full blur-2xl"></div>
+
+                        <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+                            <div>
+                                <h2 class="text-lg font-bold text-white">Live Workforce Stream</h2>
+                                <p class="text-xs text-brand-teal">Real-time status monitor</p>
+                            </div>
+                            <span class="bg-emerald-500/20 text-emerald-300 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-500/40 flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Live Updates
+                            </span>
+                        </div>
+
+                        <!-- Mini Live Hiring Ticker -->
+                        <div class="space-y-3.5">
+                            <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-brand-teal/20 text-brand-teal flex items-center justify-center text-sm font-bold">
+                                        <i class="fa-solid fa-helmet-safety"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-white">Civil Site Engineer</h3>
+                                        <span class="text-[11px] text-gray-300">Commercial Division</span>
+                                    </div>
+                                </div>
+                                <span class="bg-brand-teal/20 text-brand-teal text-xs px-2.5 py-1 rounded-md font-semibold">2 Openings</span>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-brand-lavender/20 text-brand-lavender flex items-center justify-center text-sm font-bold">
+                                        <i class="fa-solid fa-truck-monster"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-white">Heavy Equipment Operator</h3>
+                                        <span class="text-[11px] text-gray-300">Infrastructure Project</span>
+                                    </div>
+                                </div>
+                                <span class="bg-brand-lavender/20 text-brand-lavender text-xs px-2.5 py-1 rounded-md font-semibold">Urgent</span>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold">
+                                        <i class="fa-solid fa-check"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-white">Safety Officer (Hired)</h3>
+                                        <span class="text-[11px] text-gray-300">Application Closed</span>
+                                    </div>
+                                </div>
+                                <span class="bg-emerald-500/20 text-emerald-300 text-xs px-2.5 py-1 rounded-md font-semibold">Filled</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-gray-300">
+                            <span>Applicant notifications sent: <strong class="text-white">Real-Time SMS & Email</strong></span>
+                            <a href="#hiring" class="text-brand-teal font-semibold hover:underline">View All &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 bg-brand-warm relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <span class="font-coronette text-4xl text-brand-deep block">Our Legacy & Values</span>
+                <h2 class="font-revista text-3xl sm:text-5xl text-brand-dark font-black tracking-tight mt-1">
+                    Building Tomorrow With Precision & Quality
+                </h2>
+                <div class="w-20 h-1 bg-brand-teal mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Value 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-100 group reveal">
+                    <div class="w-14 h-14 rounded-xl bg-brand-deep/10 text-brand-deep flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-deep group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="font-revista text-xl font-bold text-brand-dark mb-3">Uncompromising Safety</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Every site operates under strict international safety protocols to guarantee zero-incident environments for our workforce and project partners.
+                    </p>
+                </div>
+
+                <!-- Value 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-100 group reveal">
+                    <div class="w-14 h-14 rounded-xl bg-brand-teal/20 text-brand-deep flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-teal group-hover:text-brand-dark transition-colors">
+                        <i class="fa-solid fa-compass-drafting"></i>
+                    </div>
+                    <h3 class="font-revista text-xl font-bold text-brand-dark mb-3">Engineering Integrity</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        From earthworks to sky-high architectural finishes, Diaz Construction Company delivers structural longevity using premium materials.
+                    </p>
+                </div>
+
+                <!-- Value 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-100 group reveal">
+                    <div class="w-14 h-14 rounded-xl bg-brand-violet/20 text-brand-deep flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-violet group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-users-gear"></i>
+                    </div>
+                    <h3 class="font-revista text-xl font-bold text-brand-dark mb-3">Empowered Workforce</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        We invest heavily in our personnel—providing continuous skills training, comprehensive health checks, and modern toolsets.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Fleet & Tech Showcase -->
+            <div class="mt-16 bg-gradient-to-r from-brand-deep to-[#3C325A] rounded-3xl p-8 sm:p-12 text-white shadow-xl relative overflow-hidden reveal">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <span class="font-coronette text-3xl text-brand-lavender">Modern Equipment Fleet</span>
+                        <h3 class="font-revista text-2xl sm:text-4xl font-bold mt-2">Driven by Advanced Heavy Equipment</h3>
+                        <p class="text-gray-300 text-sm mt-4 leading-relaxed">
+                            Our company owns over 85+ modern hydraulic excavators, tower cranes, transit mixers, and concrete pumps to keep all nationwide development projects moving strictly on schedule.
+                        </p>
+                        <ul class="grid grid-cols-2 gap-3 mt-6 text-sm text-brand-teal font-medium">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-xs"></i> Tower Cranes & Hoists</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-xs"></i> GPS Earthmoving Fleet</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-xs"></i> Mobile Batch Plants</li>
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-check-circle text-xs"></i> Safety Inspection Rig</li>
+                        </ul>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white/10 p-5 rounded-2xl backdrop-blur-md border border-white/10 text-center">
+                            <i class="fa-solid fa-truck-pickup text-3xl text-brand-teal mb-2"></i>
+                            <div class="font-revista font-bold text-2xl">85+</div>
+                            <div class="text-xs text-gray-300">Heavy Machinery</div>
+                        </div>
+                        <div class="bg-white/10 p-5 rounded-2xl backdrop-blur-md border border-white/10 text-center">
+                            <i class="fa-solid fa-building text-3xl text-brand-lavender mb-2"></i>
+                            <div class="font-revista font-bold text-2xl">100%</div>
+                            <div class="text-xs text-gray-300">On-Time Delivery</div>
+                        </div>
+                        <div class="bg-white/10 p-5 rounded-2xl backdrop-blur-md border border-white/10 text-center col-span-2">
+                            <i class="fa-solid fa-certificate text-3xl text-emerald-400 mb-2"></i>
+                            <div class="font-bold text-lg">Class "AAAA" Contractor</div>
+                            <div class="text-xs text-gray-300">Licensed Heavy Construction</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LIVE HIRING STATUS & APPLICANT MONITOR BOARD -->
+    <section id="hiring" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 reveal">
+                <div>
+                    <span class="font-coronette text-4xl text-brand-deep">Real-Time Recruitment</span>
+                    <h2 class="font-revista text-3xl sm:text-5xl text-brand-dark font-black tracking-tight mt-1">
+                        Live Hiring Status & Positions
+                    </h2>
+                    <p class="text-gray-600 text-sm mt-2">
+                        Positions update dynamically when candidates are hired or new slots open.
+                    </p>
+                </div>
+
+                <!-- Summary Status Counter Card -->
+                <div class="flex items-center gap-4 bg-brand-warm p-3 rounded-2xl border border-gray-300 shadow-inner">
+                    <div class="px-4 py-2 bg-white rounded-xl text-center shadow-sm">
+                        <span class="block text-xs text-gray-500 font-semibold uppercase">Open Positions</span>
+                        <span id="open-positions-counter" class="font-revista font-bold text-xl text-brand-deep">0</span>
+                    </div>
+                    <div class="px-4 py-2 bg-white rounded-xl text-center shadow-sm">
+                        <span class="block text-xs text-gray-500 font-semibold uppercase">Hired Recently</span>
+                        <span id="hired-positions-counter" class="font-revista font-bold text-xl text-emerald-600">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Board Grid -->
+            <div id="job-board-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamically rendered via JS -->
+            </div>
+
+            <!-- Notification Method Explanation Banner -->
+            <div class="mt-12 bg-gradient-to-r from-brand-deep/5 via-brand-teal/10 to-brand-violet/10 border border-brand-violet/30 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-deep text-white flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-revista font-bold text-lg text-brand-dark">Efficient Applicant Notification System</h4>
+                        <p class="text-gray-600 text-xs sm:text-sm mt-1 leading-relaxed">
+                            To ensure construction field workers, engineers, and tradespeople are updated immediately, our system utilizes <strong>Automated Real-Time SMS & Email Alerts paired with Unique Reference IDs</strong>. Candidates receive instant status updates directly on their mobile phones upon hiring review without needing complex logins.
+                        </p>
+                    </div>
+                </div>
+                <a href="#tracker" class="shrink-0 bg-brand-deep hover:bg-brand-dark text-white text-xs font-bold px-5 py-3 rounded-xl transition-all shadow-md">
+                    Test Status Tracker
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CAREERS & APPLICATION PORTAL SECTION -->
+    <section id="apply" class="py-24 bg-brand-warm relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+                <span class="font-coronette text-4xl text-brand-deep">Join Our Workforce</span>
+                <h2 class="font-revista text-3xl sm:text-5xl text-brand-dark font-black tracking-tight mt-1">
+                    Submit Job Application
+                </h2>
+                <p class="text-gray-600 text-sm mt-2">
+                    Upload your resume, NBI clearance, and medical fit-to-work certificate. Receive your reference code immediately upon submission.
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-xl border border-gray-200/80 reveal">
+                <form id="application-form" onsubmit="handleApplicationSubmit(event)" class="space-y-6">
+                    
+                    <!-- Personal Info -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">Full Name *</label>
+                            <input type="text" id="app-name" required placeholder="e.g. Juan De La Cruz" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-teal focus:border-transparent outline-none text-sm transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">Desired Position *</label>
+                            <select id="app-position" required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-teal focus:border-transparent outline-none text-sm transition bg-white">
+                                <!-- Populated dynamically from open job positions -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Contact Details -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">Email Address *</label>
+                            <input type="email" id="app-email" required placeholder="juan.delacruz@email.com" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-teal focus:border-transparent outline-none text-sm transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">Mobile Phone Number (for SMS Alert) *</label>
+                            <input type="tel" id="app-phone" required placeholder="+63 917 123 4567" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-teal focus:border-transparent outline-none text-sm transition">
+                        </div>
+                    </div>
+
+                    <!-- Document Upload Section -->
+                    <div class="pt-4 border-t border-gray-200">
+                        <h3 class="font-revista font-bold text-lg text-brand-dark mb-4">Required Document Uploads</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            
+                            <!-- Resume File Upload -->
+                            <div class="border-2 border-dashed border-gray-300 hover:border-brand-teal p-4 rounded-2xl text-center transition-colors bg-gray-50/50">
+                                <i class="fa-solid fa-file-pdf text-3xl text-brand-deep mb-2"></i>
+                                <span class="block text-xs font-bold text-gray-800">1. Resume / CV *</span>
+                                <span class="block text-[11px] text-gray-500 mt-1">PDF, DOCX (Max 5MB)</span>
+                                <input type="file" id="file-resume" required class="hidden" onchange="updateFileLabel('resume-label', this)">
+                                <label for="file-resume" id="resume-label" class="mt-3 inline-block bg-brand-deep hover:bg-brand-dark text-white text-xs font-semibold px-3 py-1.5 rounded-lg cursor-pointer transition">
+                                    Browse File
+                                </label>
+                            </div>
+
+                            <!-- NBI Clearance File Upload -->
+                            <div class="border-2 border-dashed border-gray-300 hover:border-brand-teal p-4 rounded-2xl text-center transition-colors bg-gray-50/50">
+                                <i class="fa-solid fa-id-card text-3xl text-brand-violet mb-2"></i>
+                                <span class="block text-xs font-bold text-gray-800">2. NBI Clearance *</span>
+                                <span class="block text-[11px] text-gray-500 mt-1">PDF, JPG, PNG</span>
+                                <input type="file" id="file-nbi" required class="hidden" onchange="updateFileLabel('nbi-label', this)">
+                                <label for="file-nbi" id="nbi-label" class="mt-3 inline-block bg-brand-deep hover:bg-brand-dark text-white text-xs font-semibold px-3 py-1.5 rounded-lg cursor-pointer transition">
+                                    Browse File
+                                </label>
+                            </div>
+
+                            <!-- Medical Certificate File Upload -->
+                            <div class="border-2 border-dashed border-gray-300 hover:border-brand-teal p-4 rounded-2xl text-center transition-colors bg-gray-50/50">
+                                <i class="fa-solid fa-notes-medical text-3xl text-brand-teal mb-2"></i>
+                                <span class="block text-xs font-bold text-gray-800">3. Medical Clearance *</span>
+                                <span class="block text-[11px] text-gray-500 mt-1">Fit-to-Work Certificate</span>
+                                <input type="file" id="file-medical" required class="hidden" onchange="updateFileLabel('medical-label', this)">
+                                <label for="file-medical" id="medical-label" class="mt-3 inline-block bg-brand-deep hover:bg-brand-dark text-white text-xs font-semibold px-3 py-1.5 rounded-lg cursor-pointer transition">
+                                    Browse File
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Notification Channel Checkbox -->
+                    <div class="flex items-center gap-3 p-4 bg-brand-warm/50 rounded-xl">
+                        <input type="checkbox" id="sms-optin" checked class="w-4 h-4 text-brand-teal rounded focus:ring-brand-teal">
+                        <label for="sms-optin" class="text-xs text-gray-700">
+                            I agree to receive automated <strong>SMS notifications</strong> and email alerts regarding my application status (Hired / Interview / Updates).
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full bg-gradient-to-r from-brand-deep via-brand-deep to-[#3B305B] text-white font-bold py-4 rounded-xl hover:shadow-xl transition-all transform hover:-translate-y-0.5 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>Submit Official Application</span>
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LIVE APPLICANT STATUS TRACKER -->
+    <section id="tracker" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            
+            <div class="text-center mb-10">
+                <span class="font-coronette text-4xl text-brand-deep">Applicant Portal</span>
+                <h2 class="font-revista text-3xl font-black text-brand-dark">Check Application Status</h2>
+                <p class="text-xs sm:text-sm text-gray-600 mt-1">Enter your Reference ID or Registered Email to track live progress</p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="bg-brand-warm p-2 rounded-2xl shadow-md border border-gray-300 flex items-center gap-2 max-w-xl mx-auto">
+                <i class="fa-solid fa-magnifying-glass text-gray-500 pl-4"></i>
+                <input type="text" id="tracker-search-input" placeholder="Enter Ref ID (e.g. DIAZ-2026-8892) or Email" class="w-full bg-transparent border-none outline-none py-3 text-sm font-medium">
+                <button onclick="searchApplicationStatus()" class="bg-brand-deep hover:bg-brand-dark text-white px-6 py-3 rounded-xl text-xs font-bold transition shrink-0">
+                    Search Status
+                </button>
+            </div>
+
+            <!-- Tracker Result Card Output Container -->
+            <div id="tracker-result-container" class="mt-8">
+                <div class="text-center py-8 text-gray-400 text-xs italic border-2 border-dashed border-gray-200 rounded-2xl">
+                    Submit an application above to test real-time search, or enter a reference code.
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROJECTS PORTFOLIO SECTION -->
+    <section id="projects" class="py-24 bg-brand-warm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="font-coronette text-4xl text-brand-deep">Masterpiece Infrastructure</span>
+                <h2 class="font-revista text-3xl sm:text-5xl text-brand-dark font-black">Featured Projects</h2>
+                <div class="w-20 h-1 bg-brand-teal mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all group">
+                    <div class="h-56 bg-brand-deep relative overflow-hidden flex items-center justify-center text-brand-teal">
+                        <i class="fa-solid fa-building-columns text-7xl opacity-40 group-hover:scale-110 transition-transform duration-500"></i>
+                        <span class="absolute top-4 right-4 bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Completed</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-brand-teal uppercase tracking-widest">Commercial Skyscraper</span>
+                        <h3 class="font-revista text-xl font-bold text-brand-dark mt-1">Diaz Financial Tower</h3>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">42-story LEED-certified commercial complex with subterranean multi-level parking.</p>
+                        <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center text-xs text-gray-600 font-medium">
+                            <span><i class="fa-solid fa-location-dot text-brand-violet mr-1"></i> Metro CBD</span>
+                            <span>₱2.4 Billion</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all group">
+                    <div class="h-56 bg-gradient-to-tr from-brand-deep to-brand-violet relative overflow-hidden flex items-center justify-center text-brand-lavender">
+                        <i class="fa-solid fa-bridge text-7xl opacity-40 group-hover:scale-110 transition-transform duration-500"></i>
+                        <span class="absolute top-4 right-4 bg-brand-teal text-brand-dark text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Active Site</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-brand-teal uppercase tracking-widest">Civil Infrastructure</span>
+                        <h3 class="font-revista text-xl font-bold text-brand-dark mt-1">Coastal Skyway Flyover</h3>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">6-lane elevated express highway utilizing post-tensioned precast girder technology.</p>
+                        <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center text-xs text-gray-600 font-medium">
+                            <span><i class="fa-solid fa-location-dot text-brand-violet mr-1"></i> Southern Sector</span>
+                            <span>₱4.8 Billion</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all group">
+                    <div class="h-56 bg-brand-dark relative overflow-hidden flex items-center justify-center text-brand-teal">
+                        <i class="fa-solid fa-industry text-7xl opacity-40 group-hover:scale-110 transition-transform duration-500"></i>
+                        <span class="absolute top-4 right-4 bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Completed</span>
+                    </div>
+                    <div class="p-6">
+                        <span class="text-xs font-bold text-brand-teal uppercase tracking-widest">Industrial Facility</span>
+                        <h3 class="font-revista text-xl font-bold text-brand-dark mt-1">Apex Logistics Hub</h3>
+                        <p class="text-xs text-gray-500 mt-2 leading-relaxed">High-capacity distribution center featuring temperature-controlled warehouses.</p>
+                        <div class="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center text-xs text-gray-600 font-medium">
+                            <span><i class="fa-solid fa-location-dot text-brand-violet mr-1"></i> Industrial Zone</span>
+                            <span>₱1.1 Billion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark text-white py-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded bg-brand-teal text-brand-dark flex items-center justify-center font-bold">D</div>
+                        <span class="font-revista text-xl font-bold">DIAZ CONSTRUCTION</span>
+                    </div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Leading the heavy engineering and industrial construction sector with structural excellence and modern workforce management.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-revista font-bold text-sm text-brand-teal mb-3">Quick Links</h4>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li><a href="#about" class="hover:text-white transition">About Our Firm</a></li>
+                        <li><a href="#hiring" class="hover:text-white transition">Live Openings Board</a></li>
+                        <li><a href="#apply" class="hover:text-white transition">Careers & Submissions</a></li>
+                        <li><a href="#tracker" class="hover:text-white transition">Applicant Status Tracker</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-revista font-bold text-sm text-brand-teal mb-3">Headquarters</h4>
+                    <p class="text-xs text-gray-300 leading-relaxed">
+                        Diaz Corporate Plaza, 100 Engineering Way, Construction District, Philippines
+                    </p>
+                    <p class="text-xs text-gray-400 mt-2"><i class="fa-solid fa-phone mr-1"></i> (02) 8890-DIAZ</p>
+                    <p class="text-xs text-gray-400"><i class="fa-solid fa-envelope mr-1"></i> careers@diazconstruction.com</p>
+                </div>
+
+                <div>
+                    <h4 class="font-revista font-bold text-sm text-brand-teal mb-3">System Access</h4>
+                    <p class="text-xs text-gray-400 mb-3">Authorized personnel access only:</p>
+                    <!-- Discrete / Hidden Employer Access Gateway Trigger -->
+                    <button onclick="openEmployerAuthModal()" class="text-gray-500 hover:text-brand-teal text-xs flex items-center gap-2 transition bg-white/5 px-3 py-2 rounded-lg border border-white/10 w-full">
+                        <i class="fa-solid fa-lock text-[10px]"></i>
+                        <span>Staff Security Portal</span>
+                    </button>
+                    <span class="text-[10px] text-gray-600 block mt-1 italic">Press Ctrl+Shift+E for quick HR login</span>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-white/10 text-center text-xs text-gray-500">
+                &copy; 2026 Diaz Construction Company. All rights reserved. Built with precision.
+            </div>
+        </div>
+    </footer>
+
+    <!-- PASSWORD LOGIN AUTHENTICATION MODAL -->
+    <div id="employer-auth-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="bg-brand-dark text-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-brand-teal/40 relative">
+            <button onclick="closeEmployerAuthModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 rounded-2xl bg-brand-deep text-brand-teal flex items-center justify-center text-2xl mx-auto mb-3 shadow-lg border border-brand-teal/30">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h3 class="font-revista text-xl font-bold text-white">Employer Verification</h3>
+                <p class="text-xs text-gray-400 mt-1">Authorized Diaz HR & Superintendents Only</p>
+            </div>
+
+            <form onsubmit="verifyEmployerPassword(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-brand-teal uppercase tracking-wider mb-2">Employer Passcode *</label>
+                    <div class="relative">
+                        <input type="password" id="employer-passcode-input" required placeholder="Enter password" class="w-full bg-white/10 text-white placeholder-gray-500 px-4 py-3 rounded-xl border border-white/20 focus:ring-2 focus:ring-brand-teal outline-none text-sm font-mono pr-10">
+                        <i class="fa-solid fa-key absolute right-3.5 top-3.5 text-gray-400 text-xs"></i>
+                    </div>
+                    <p id="auth-error-msg" class="text-red-400 text-[11px] mt-1.5 hidden flex items-center gap-1">
+                        <i class="fa-solid fa-circle-exclamation"></i> Incorrect passcode. Try 'diaz2026' or 'admin123'.
+                    </p>
+                </div>
+
+                <div class="text-[10px] text-gray-400 bg-white/5 p-2.5 rounded-lg border border-white/5">
+                    <span class="text-brand-teal font-bold block mb-0.5"><i class="fa-solid fa-info-circle"></i> Default Test Credentials:</span>
+                    Password: <code class="text-brand-lavender font-mono">diaz2026</code> or <code class="text-brand-lavender font-mono">admin123</code>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-brand-teal to-teal-400 text-brand-dark font-bold py-3 rounded-xl text-xs hover:shadow-lg transition">
+                    Unlock Employer Portal
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- EMPLOYER / ADMIN PORTAL DRAWER (SECURED & RESTRICTED) -->
+    <div id="admin-panel" class="fixed inset-y-0 right-0 w-full max-w-2xl bg-brand-dark text-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 overflow-y-auto flex flex-col border-l border-brand-teal/30">
+        
+        <!-- Admin Header -->
+        <div class="p-6 bg-brand-deep/90 backdrop-blur-md sticky top-0 z-10 flex items-center justify-between border-b border-white/10">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-teal text-brand-dark flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-user-gear"></i>
+                </div>
+                <div>
+                    <h2 class="font-revista text-lg font-bold text-white">Diaz HR Employer Control Panel</h2>
+                    <span class="text-xs text-brand-teal"><i class="fa-solid fa-lock text-[10px]"></i> Authenticated Session Active</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="logoutEmployer()" class="bg-red-500/20 hover:bg-red-500/40 text-red-300 border border-red-500/30 text-xs font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-right-from-bracket text-[10px]"></i> Logout
+                </button>
+                <button onclick="toggleAdminPanel(false)" class="text-gray-400 hover:text-white text-2xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EMPLOYER / ADMIN PORTAL DRAWER (EMBEDDED SIMULATOR) -->
+    <div id="admin-panel" class="fixed inset-y-0 right-0 w-full max-w-2xl bg-brand-dark text-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 overflow-y-auto flex flex-col border-l border-brand-teal/30">
+        
+        <!-- Admin Header -->
+        <div class="p-6 bg-brand-deep/80 backdrop-blur-md sticky top-0 z-10 flex items-center justify-between border-b border-white/10">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-teal text-brand-dark flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-user-gear"></i>
+                </div>
+                <div>
+                    <h2 class="font-revista text-lg font-bold text-white">Diaz HR Employer Control Panel</h2>
+                    <span class="text-xs text-brand-teal">Live Recruitment & Status Manager</span>
+                </div>
+            </div>
+            <button onclick="toggleAdminPanel()" class="text-gray-400 hover:text-white text-2xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="p-6 space-y-8 flex-1">
+            
+            <!-- Employer Control Section 1: Manage Positions Live Status -->
+            <div class="bg-white/5 rounded-2xl p-5 border border-white/10">
+                <h3 class="font-revista font-bold text-base text-brand-teal mb-1">1. Live Job Slots & Status Controller</h3>
+                <p class="text-xs text-gray-400 mb-4">Toggle opening statuses to reflect live availability on the website in real-time.</p>
+                
+                <div id="admin-job-controls" class="space-y-3">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+
+            <!-- Employer Control Section 2: Review Submitted Applications -->
+            <div class="bg-white/5 rounded-2xl p-5 border border-white/10">
+                <div class="flex items-center justify-between mb-3">
+                    <div>
+                        <h3 class="font-revista font-bold text-base text-brand-lavender">2. Applicant Submissions Review</h3>
+                        <p class="text-xs text-gray-400">Review documents and mark as "Hired" or "Archived". Action triggers SMS alert simulation.</p>
+                    </div>
+                    <span id="admin-app-count" class="bg-brand-violet text-white text-xs px-2.5 py-1 rounded-full font-bold">0</span>
+                </div>
+
+                <div id="admin-applications-list" class="space-y-4 mt-4">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+
+        </div>
+
+        <div class="p-4 bg-brand-deep/90 border-t border-white/10 text-center text-xs text-gray-400">
+            Changes made in this Employer Panel immediately reflect across the Live Hiring Board and Status Tracker.
+        </div>
+    </div>
+
+    <!-- NOTIFICATION / SIMULATED SMS & EMAIL POPUP MODAL -->
+    <div id="notification-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-brand-teal/30 relative transform transition-all scale-95 opacity-0" id="modal-content">
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <div class="text-center mb-4">
+                <div id="modal-icon" class="w-16 h-16 rounded-2xl bg-brand-teal/20 text-brand-deep flex items-center justify-center text-3xl mx-auto mb-3">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
+                <h3 id="modal-title" class="font-revista text-2xl font-bold text-brand-dark">Application Received!</h3>
+                <p id="modal-subtitle" class="text-xs text-gray-500 mt-1">Automated dispatch preview sent to applicant</p>
+            </div>
+
+            <!-- Simulated Smartphone SMS Preview Card -->
+            <div class="bg-gray-900 rounded-2xl p-4 text-white shadow-inner mb-6 relative font-sans">
+                <div class="flex items-center justify-between text-[10px] text-gray-400 mb-2 border-b border-gray-800 pb-1">
+                    <span class="flex items-center gap-1"><i class="fa-solid fa-comment-sms text-brand-teal"></i> SMS Dispatch (Diaz HR)</span>
+                    <span>Just Now</span>
+                </div>
+                <p id="modal-sms-text" class="text-xs leading-relaxed text-gray-200">
+                    Hello! Your application for Civil Site Engineer at Diaz Construction has been received. Your Reference ID is DIAZ-2026-8892. We will notify you via SMS when reviewed.
+                </p>
+            </div>
+
+            <div class="space-y-2">
+                <div class="text-[11px] text-gray-500 bg-brand-warm/60 p-2.5 rounded-xl">
+                    <span class="font-bold text-brand-dark block">Ref Tracking Code:</span>
+                    <span id="modal-ref-code" class="font-mono text-sm font-bold text-brand-deep">DIAZ-2026-8892</span>
+                </div>
+                <button onclick="closeModal()" class="w-full bg-brand-deep hover:bg-brand-dark text-white font-bold py-3 rounded-xl text-xs transition">
+                    Done / Continue
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* ==========================================================================
+           1. APPLICATION STATE & DATA STORAGE
+           ========================================================================== */
+        
+        // Initial Job Openings Data
+        let jobsData = [
+            {
+                id: 'job-1',
+                title: 'Civil Site Engineer',
+                department: 'Commercial Division',
+                location: 'Metro CBD Project Site',
+                slots: 2,
+                status: 'Urgent Hiring', // 'Urgent Hiring', 'Open', 'Filled'
+                requirements: ['BS Civil Engineering', 'PRC License', '3+ Yrs Site Exp']
+            },
+            {
+                id: 'job-2',
+                title: 'Heavy Equipment Operator',
+                department: 'Infrastructure Division',
+                location: 'Coastal Skyway Project',
+                slots: 4,
+                status: 'Urgent Hiring',
+                requirements: ['TESDA NC II Certified', 'Heavy Driver License', 'Excavator Skilled']
+            },
+            {
+                id: 'job-3',
+                title: 'Safety Officer (SO2/SO3)',
+                department: 'EHS Department',
+                location: 'Industrial Zone',
+                slots: 0,
+                status: 'Filled',
+                requirements: ['BOSH/COSH Certificate', 'OSHA Standard Knowledge']
+            },
+            {
+                id: 'job-4',
+                title: 'Master Mason & Finishing Carpenter',
+                department: 'Residential Division',
+                location: 'Multiple Sites',
+                slots: 6,
+                status: 'Open',
+                requirements: ['Concrete Finishing', 'Blueprint Reading', '5+ Yrs Exp']
+            },
+            {
+                id: 'job-5',
+                title: 'Project Cost Estimator',
+                department: 'Engineering & Quantities',
+                location: 'Headquarters',
+                slots: 1,
+                status: 'Open',
+                requirements: ['AutoCAD/Revit Proficient', 'Quantity Surveying']
+            }
+        ];
+
+        // Seeded Submitted Applications Array (Persisted in localStorage)
+        let applications = JSON.parse(localStorage.getItem('diaz_applications')) || [
+            {
+                refId: 'DIAZ-2026-1042',
+                name: 'Roberto Santos',
+                email: 'roberto.santos@email.com',
+                phone: '+63 917 555 1234',
+                position: 'Safety Officer (SO2/SO3)',
+                status: 'Hired', // 'Under Review', 'Hired', 'Archived'
+                submittedAt: '2026-10-18',
+                files: { resume: 'R_Santos_CV.pdf', nbi: 'NBI_Clearance_2026.pdf', medical: 'FitToWork_Cert.pdf' }
+            },
+            {
+                refId: 'DIAZ-2026-3091',
+                name: 'Maria Clara Cruz',
+                email: 'maria.cruz@email.com',
+                phone: '+63 918 222 9876',
+                position: 'Civil Site Engineer',
+                status: 'Under Review',
+                submittedAt: '2026-10-20',
+                files: { resume: 'M_Cruz_Resume.pdf', nbi: 'NBI_Clearance.pdf', medical: 'Medical_Result.pdf' }
+            }
+        ];
+
+        /* ==========================================================================
+           2. DOM RENDER FUNCTIONS
+           ========================================================================== */
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderJobBoard();
+            renderJobDropdown();
+            renderAdminControls();
+            renderAdminApplications();
+            updateStatsCounters();
+            initCursorEffect();
+            initScrollAnimations();
+        });
+
+        // Render Public Live Job Board
+        function renderJobBoard() {
+            const grid = document.getElementById('job-board-grid');
+            grid.innerHTML = '';
+
+            jobsData.forEach(job => {
+                let statusBadge = '';
+                if (job.status === 'Urgent Hiring') {
+                    statusBadge = `<span class="bg-amber-100 text-amber-800 border border-amber-300 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span> Urgent Hiring</span>`;
+                } else if (job.status === 'Open') {
+                    statusBadge = `<span class="bg-brand-teal/20 text-brand-dark text-xs font-bold px-3 py-1 rounded-full">Open (${job.slots} Slots)</span>`;
+                } else {
+                    statusBadge = `<span class="bg-gray-100 text-gray-500 text-xs font-bold px-3 py-1 rounded-full">Position Filled</span>`;
+                }
+
+                const card = document.createElement('div');
+                card.className = `glass-card p-6 rounded-3xl border ${job.status === 'Filled' ? 'opacity-70 bg-gray-50' : 'bg-white'} shadow-sm hover:shadow-xl transition-all flex flex-col justify-between`;
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="text-[11px] font-bold text-brand-violet uppercase tracking-wider">${job.department}</span>
+                            ${statusBadge}
+                        </div>
+                        <h3 class="font-revista text-xl font-bold text-brand-dark mb-1">${job.title}</h3>
+                        <p class="text-xs text-gray-500 mb-4"><i class="fa-solid fa-location-dot text-brand-teal mr-1"></i> ${job.location}</p>
+                        
+                        <div class="space-y-1.5 mb-6">
+                            <span class="text-[11px] font-bold text-gray-700 block uppercase">Key Requirements:</span>
+                            ${job.requirements.map(req => `<div class="text-xs text-gray-600 flex items-center gap-2"><i class="fa-solid fa-check text-[10px] text-brand-teal"></i> ${req}</div>`).join('')}
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                        <span class="text-xs text-gray-500 font-medium">Slots Open: <strong class="text-brand-dark">${job.slots}</strong></span>
+                        ${job.status !== 'Filled' ? 
+                            `<a href="#apply" onclick="selectPositionForApply('${job.title}')" class="bg-brand-deep hover:bg-brand-dark text-white text-xs font-bold px-4 py-2 rounded-xl transition">Apply Now</a>` : 
+                            `<span class="text-xs text-gray-400 italic">Closed</span>`}
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Populate Select Dropdown in Application Form
+        function renderJobDropdown() {
+            const select = document.getElementById('app-position');
+            select.innerHTML = '<option value="" disabled selected>-- Select Position --</option>';
+            
+            jobsData.filter(j => j.status !== 'Filled').forEach(job => {
+                const opt = document.createElement('option');
+                opt.value = job.title;
+                opt.textContent = `${job.title} (${job.slots} slot${job.slots > 1 ? 's' : ''} available)`;
+                select.appendChild(opt);
+            });
+        }
+
+        // Render Admin Control Panel Jobs Toggle
+        function renderAdminControls() {
+            const container = document.getElementById('admin-job-controls');
+            container.innerHTML = '';
+
+            jobsData.forEach(job => {
+                const item = document.createElement('div');
+                item.className = 'p-3 bg-white/5 rounded-xl flex items-center justify-between text-xs border border-white/5';
+                item.innerHTML = `
+                    <div>
+                        <div class="font-bold text-white">${job.title}</div>
+                        <div class="text-gray-400 text-[10px]">${job.slots} slot(s) open</div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <select onchange="updateJobStatusAdmin('${job.id}', this.value)" class="bg-gray-800 text-white border border-gray-600 rounded-lg px-2 py-1 text-[11px] outline-none">
+                            <option value="Urgent Hiring" ${job.status === 'Urgent Hiring' ? 'selected' : ''}>Urgent Hiring</option>
+                            <option value="Open" ${job.status === 'Open' ? 'selected' : ''}>Open</option>
+                            <option value="Filled" ${job.status === 'Filled' ? 'selected' : ''}>Filled / Closed</option>
+                        </select>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // Render Submitted Applications in Admin Panel
+        function renderAdminApplications() {
+            const container = document.getElementById('admin-applications-list');
+            const countBadge = document.getElementById('admin-app-count');
+            countBadge.textContent = applications.length;
+
+            if (applications.length === 0) {
+                container.innerHTML = `<div class="text-xs text-gray-400 italic">No applications submitted yet.</div>`;
+                return;
+            }
+
+            container.innerHTML = '';
+            applications.forEach((app, idx) => {
+                const card = document.createElement('div');
+                card.className = 'p-4 bg-white/10 rounded-xl border border-white/10 space-y-3';
+                
+                let badgeColor = app.status === 'Hired' ? 'bg-emerald-500/20 text-emerald-300' : 
+                                 app.status === 'Archived' ? 'bg-red-500/20 text-red-300' : 'bg-amber-500/20 text-amber-300';
+
+                card.innerHTML = `
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <span class="font-mono text-[10px] text-brand-teal font-bold">${app.refId}</span>
+                            <h4 class="font-bold text-sm text-white">${app.name}</h4>
+                            <span class="text-xs text-gray-300 block">${app.position}</span>
+                        </div>
+                        <span class="text-[10px] font-bold px-2.5 py-1 rounded-full ${badgeColor}">${app.status}</span>
+                    </div>
+
+                    <div class="text-[11px] text-gray-400 space-y-1">
+                        <div><i class="fa-solid fa-envelope mr-1"></i> ${app.email}</div>
+                        <div><i class="fa-solid fa-phone mr-1"></i> ${app.phone}</div>
+                        <div class="flex items-center gap-2 pt-1 text-brand-lavender">
+                            <span><i class="fa-solid fa-paperclip"></i> Files:</span>
+                            <span class="underline cursor-pointer" onclick="alert('Viewing Resume: ${app.files.resume}')">Resume</span> |
+                            <span class="underline cursor-pointer" onclick="alert('Viewing NBI: ${app.files.nbi}')">NBI</span> |
+                            <span class="underline cursor-pointer" onclick="alert('Viewing Medical Cert: ${app.files.medical}')">Medical</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 pt-2 border-t border-white/10">
+                        <button onclick="updateApplicantStatus(${idx}, 'Hired')" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-1.5 rounded-lg text-xs transition">
+                            <i class="fa-solid fa-user-check mr-1"></i> Hire Applicant
+                        </button>
+                        <button onclick="updateApplicantStatus(${idx}, 'Archived')" class="bg-white/10 hover:bg-white/20 text-gray-300 py-1.5 px-3 rounded-lg text-xs transition">
+                            Archive
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Update Counter Numbers Across Site
+        function updateStatsCounters() {
+            const openJobs = jobsData.filter(j => j.status !== 'Filled').length;
+            const hiredCount = applications.filter(a => a.status === 'Hired').length + 450;
+
+            document.getElementById('open-positions-counter').textContent = openJobs;
+            document.getElementById('hired-positions-counter').textContent = applications.filter(a => a.status === 'Hired').length;
+            document.getElementById('hero-hired-count').textContent = `${hiredCount}+`;
+        }
+
+        /* ==========================================================================
+           3. INTERACTIVE LOGIC & EVENT HANDLERS
+           ========================================================================== */
+
+        // Auto Select Job Position when Clicking "Apply Now" on Job Card
+        function selectPositionForApply(jobTitle) {
+            const select = document.getElementById('app-position');
+            select.value = jobTitle;
+        }
+
+        // File Input Custom Label Update
+        function updateFileLabel(labelId, input) {
+            const label = document.getElementById(labelId);
+            if (input.files && input.files[0]) {
+                label.textContent = `✓ ${input.files[0].name.substring(0, 14)}...`;
+                label.classList.remove('bg-brand-deep');
+                label.classList.add('bg-emerald-600');
+            }
+        }
+
+        // Application Form Submission Handling
+        function handleApplicationSubmit(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('app-name').value;
+            const email = document.getElementById('app-email').value;
+            const phone = document.getElementById('app-phone').value;
+            const position = document.getElementById('app-position').value;
+
+            const resumeFile = document.getElementById('file-resume').files[0]?.name || 'Resume_Doc.pdf';
+            const nbiFile = document.getElementById('file-nbi').files[0]?.name || 'NBI_Clearance.pdf';
+            const medicalFile = document.getElementById('file-medical').files[0]?.name || 'Medical_FitToWork.pdf';
+
+            // Generate Unique Reference ID
+            const refCode = `DIAZ-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+
+            const newApp = {
+                refId: refCode,
+                name: name,
+                email: email,
+                phone: phone,
+                position: position,
+                status: 'Under Review',
+                submittedAt: new Date().toISOString().split('T')[0],
+                files: { resume: resumeFile, nbi: nbiFile, medical: medicalFile }
+            };
+
+            // Store in array and LocalStorage
+            applications.unshift(newApp);
+            localStorage.setItem('diaz_applications', JSON.stringify(applications));
+
+            // Refresh UI
+            renderAdminApplications();
+            updateStatsCounters();
+
+            // Show Real-time Simulated SMS & Email Confirmation Modal
+            showModal({
+                title: 'Application Submitted!',
+                subtitle: 'Simulated Instant SMS Dispatch Sent To Mobile Phone',
+                refCode: refCode,
+                smsText: `[DIAZ CONST] Hi ${name}! Your application for ${position} was received. Your Ref ID is ${refCode}. Status: UNDER REVIEW. You will receive an SMS update once evaluated.`
+            });
+
+            // Reset Form
+            document.getElementById('application-form').reset();
+            ['resume-label', 'nbi-label', 'medical-label'].forEach(id => {
+                const l = document.getElementById(id);
+                l.textContent = 'Browse File';
+                l.classList.remove('bg-emerald-600');
+                l.classList.add('bg-brand-deep');
+            });
+        }
+
+        // Applicant Status Search Bar Logic
+        function searchApplicationStatus() {
+            const query = document.getElementById('tracker-search-input').value.trim().toLowerCase();
+            const container = document.getElementById('tracker-result-container');
+
+            if (!query) {
+                container.innerHTML = `<div class="p-4 bg-amber-50 text-amber-800 rounded-xl text-xs text-center">Please enter your Reference ID or email address.</div>`;
+                return;
+            }
+
+            const match = applications.find(a => a.refId.toLowerCase() === query || a.email.toLowerCase() === query);
+
+            if (match) {
+                let statusStep = match.status === 'Hired' ? 'Step 3 of 3: HIRED' : 'Step 2 of 3: UNDER EVALUATION';
+                let alertColor = match.status === 'Hired' ? 'bg-emerald-50 text-emerald-900 border-emerald-300' : 'bg-blue-50 text-blue-900 border-blue-300';
+
+                container.innerHTML = `
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border ${alertColor} transition-all">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-gray-200 pb-4">
+                            <div>
+                                <span class="text-xs font-mono font-bold text-brand-teal">${match.refId}</span>
+                                <h3 class="font-revista font-bold text-xl text-brand-dark">${match.name}</h3>
+                                <p class="text-xs text-gray-500">${match.position}</p>
+                            </div>
+                            <span class="px-4 py-1.5 rounded-full text-xs font-bold ${match.status === 'Hired' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-white'}">
+                                ${match.status.toUpperCase()}
+                            </span>
+                        </div>
+
+                        <div class="mt-4 space-y-3 text-xs">
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Submission Date:</span>
+                                <span class="font-medium">${match.submittedAt}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-500">Mobile Phone Alert Opt-in:</span>
+                                <span class="font-medium text-emerald-600">${match.phone} (Active)</span>
+                            </div>
+                            
+                            <div class="p-3 rounded-xl bg-gray-50 border border-gray-200 mt-2">
+                                <span class="font-bold block text-brand-dark mb-1">Live Notification Status:</span>
+                                <p class="text-gray-600">
+                                    ${match.status === 'Hired' ? 
+                                    '🎉 <strong>Congratulations!</strong> You have been selected for this position. Our HR Superintendent will contact you via SMS for your site deployment schedule.' : 
+                                    '📋 Your submitted NBI clearance, Medical Fit-to-Work certificate, and Resume are currently being reviewed by Diaz Construction HR Officers.'}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <div class="p-6 bg-red-50 text-red-800 rounded-2xl border border-red-200 text-center text-xs">
+                        <i class="fa-solid fa-circle-xmark text-2xl mb-2 text-red-500 block"></i>
+                        No application record found matching "<strong>${query}</strong>". Please verify your Reference ID.
+                    </div>
+                `;
+            }
+        }
+
+        // Employer Admin - Change Job Availability
+        function updateJobStatusAdmin(jobId, newStatus) {
+            const job = jobsData.find(j => j.id === jobId);
+            if (job) {
+                job.status = newStatus;
+                job.slots = newStatus === 'Filled' ? 0 : (job.slots === 0 ? 2 : job.slots);
+                
+                renderJobBoard();
+                renderJobDropdown();
+                updateStatsCounters();
+            }
+        }
+
+        // Employer Admin - Hire or Archive Applicant
+        function updateApplicantStatus(index, newStatus) {
+            const app = applications[index];
+            app.status = newStatus;
+
+            localStorage.setItem('diaz_applications', JSON.stringify(applications));
+
+            renderAdminApplications();
+            updateStatsCounters();
+
+            // Trigger SMS Dispatch Simulation Modal
+            showModal({
+                title: newStatus === 'Hired' ? 'Applicant Hired!' : 'Application Status Updated',
+                subtitle: 'Automated Real-Time SMS Alert Triggered',
+                refCode: app.refId,
+                smsText: newStatus === 'Hired' ? 
+                    `[DIAZ CONST] CONGRATULATIONS ${app.name}! You have been HIRED as ${app.position}. Please report to Diaz HQ for orientation on Monday.` : 
+                    `[DIAZ CONST] Hi ${app.name}, your application status for ${app.position} has been updated to ${newStatus}.`
+            });
+        }
+
+        /* ==========================================================================
+           4. MODAL & SECURE ADMIN DRAWER TOGGLES
+           ========================================================================== */
+
+        let isEmployerAuthenticated = false;
+
+        // Open Password Verification Modal
+        function openEmployerAuthModal() {
+            if (isEmployerAuthenticated) {
+                toggleAdminPanel(true);
+                return;
+            }
+            const modal = document.getElementById('employer-auth-modal');
+            modal.classList.remove('hidden');
+            document.getElementById('employer-passcode-input').focus();
+        }
+
+        function closeEmployerAuthModal() {
+            document.getElementById('employer-auth-modal').classList.add('hidden');
+            document.getElementById('auth-error-msg').classList.add('hidden');
+            document.getElementById('employer-passcode-input').value = '';
+        }
+
+        // Verify Employer Passcode
+        function verifyEmployerPassword(e) {
+            e.preventDefault();
+            const inputPass = document.getElementById('employer-passcode-input').value.trim();
+            const errorMsg = document.getElementById('auth-error-msg');
+
+            // Passcode check ('diaz2026' or 'admin123')
+            if (inputPass === 'diaz2026' || inputPass === 'admin123') {
+                isEmployerAuthenticated = true;
+                closeEmployerAuthModal();
+                toggleAdminPanel(true);
+                
+                // Show confirmation feedback
+                showModal({
+                    title: 'Employer Access Granted',
+                    subtitle: 'Authenticated HR Officer Dashboard Active',
+                    refCode: 'SESSION-SECURE-2026',
+                    smsText: '[SECURITY ALERT] Successful employer login to Diaz HR Management System. Full applicant review & status tools unlocked.'
+                });
+            } else {
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        // Logout Employer & Lock Portal
+        function logoutEmployer() {
+            isEmployerAuthenticated = false;
+            toggleAdminPanel(false);
+        }
+
+        // Toggle Drawer Visibility with Security Guard
+        function toggleAdminPanel(forceOpen) {
+            const panel = document.getElementById('admin-panel');
+            if (forceOpen === true && !isEmployerAuthenticated) {
+                openEmployerAuthModal();
+                return;
+            }
+
+            if (forceOpen === true) {
+                panel.classList.remove('translate-x-full');
+            } else if (forceOpen === false) {
+                panel.classList.add('translate-x-full');
+            } else {
+                if (!isEmployerAuthenticated) {
+                    openEmployerAuthModal();
+                } else {
+                    panel.classList.toggle('translate-x-full');
+                }
+            }
+        }
+
+        // Keyboard Shortcut Activation (Ctrl + Shift + E)
+        window.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'e') {
+                e.preventDefault();
+                openEmployerAuthModal();
+            }
+        });
+
+        function showModal({ title, subtitle, refCode, smsText }) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-subtitle').textContent = subtitle;
+            document.getElementById('modal-ref-code').textContent = refCode;
+            document.getElementById('modal-sms-text').textContent = smsText;
+
+            const modal = document.getElementById('notification-modal');
+            const content = document.getElementById('modal-content');
+            
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('notification-modal');
+            const content = document.getElementById('modal-content');
+            
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        /* ==========================================================================
+           5. INTERACTIVE CURSOR TRAIL & PARTICLES
+           ========================================================================== */
+
+        function initCursorEffect() {
+            const dot = document.getElementById('cursor-dot');
+            const ring = document.getElementById('cursor-ring');
+
+            let mouseX = 0, mouseY = 0;
+            let ringX = 0, ringY = 0;
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+
+                dot.style.left = `${mouseX}px`;
+                dot.style.top = `${mouseY}px`;
+            });
+
+            // Smooth Lerp Physics for Ring
+            function renderRing() {
+                ringX += (mouseX - ringX) * 0.15;
+                ringY += (mouseY - ringY) * 0.15;
+
+                ring.style.left = `${ringX}px`;
+                ring.style.top = `${ringY}px`;
+
+                requestAnimationFrame(renderRing);
+            }
+            renderRing();
+
+            // Click Particle Burst Effect
+            window.addEventListener('click', (e) => {
+                for (let i = 0; i < 6; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'click-particle';
+                    particle.style.left = `${e.clientX}px`;
+                    particle.style.top = `${e.clientY}px`;
+                    particle.style.width = `${Math.random() * 8 + 4}px`;
+                    particle.style.height = particle.style.width;
+                    particle.style.backgroundColor = i % 2 === 0 ? '#6CBFAD' : '#BA98C1';
+
+                    const dx = (Math.random() - 0.5) * 80;
+                    const dy = (Math.random() - 0.5) * 80;
+                    particle.style.setProperty('--dx', `${dx}px`);
+                    particle.style.setProperty('--dy', `${dy}px`);
+
+                    document.body.appendChild(particle);
+                    setTimeout(() => particle.remove(), 600);
+                }
+            });
+        }
+
+        /* ==========================================================================
+           6. SCROLL REVEAL ANIMATIONS & GLASSNAV TWEAKS
+           ========================================================================== */
+
+        function initScrollAnimations() {
+            const header = document.getElementById('main-header');
+            const reveals = document.querySelectorAll('.reveal');
+
+            window.addEventListener('scroll', () => {
+                // Shrink Navbar on Scroll
+                if (window.scrollY > 50) {
+                    header.classList.add('py-2');
+                    header.classList.remove('py-4');
+                } else {
+                    header.classList.add('py-4');
+                    header.classList.remove('py-2');
+                }
+
+                // Scroll Reveal Observer Trigger
+                reveals.forEach(el => {
+                    const windowHeight = window.innerHeight;
+                    const elementTop = el.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - 80) {
+                        el.classList.add('active');
+                    }
+                });
+            });
+
+            // Mobile Navigation Toggle
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>
